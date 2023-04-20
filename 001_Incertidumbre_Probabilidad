@@ -1,0 +1,33 @@
+# IA_P7_Enfoque_Probabilidad
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generamos datos aleatorios siguiendo una distribución normal
+mu = 0
+sigma = 1
+datos = np.random.normal(mu, sigma, 1000)
+
+# Creamos el histograma de los datos
+num_bins = 50
+fig, ax = plt.subplots()
+n, bins, patches = ax.hist(datos, num_bins, density=1)
+
+# Calculamos la media y desviación estándar de los datos
+media = np.mean(datos)
+std = np.std(datos)
+
+# Añadimos una línea vertical que muestra la media de los datos
+ax.axvline(media, color='r', linestyle='dashed', linewidth=2)
+
+# Añadimos texto que muestra la media y la desviación estándar de los datos
+texto = f"$\mu={media:.2f}$\n$\sigma={std:.2f}$"
+ax.text(0.05, 0.95, texto, transform=ax.transAxes, fontsize=14,
+        verticalalignment='top', bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+
+# Ajustamos el tamaño y los límites del gráfico
+fig.tight_layout()
+ax.set_xlim([mu-4*sigma, mu+4*sigma])
+ax.set_ylim([0, 0.45])
+
+# Mostramos el gráfico
+plt.show()
